@@ -1,0 +1,20 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Sheet/AssemblyInfo.cs">
+    <Files>
+      <File FileName="Sheet/Main.cs" Line="3" Column="16" />
+      <File FileName="Sheet/Spreadsheet.cs" Line="6" Column="11" />
+      <File FileName="Sheet/SpreadsheetsDictionary.cs" Line="4" Column="11" />
+      <File FileName="Sheet/RowDictionary.cs" Line="4" Column="11" />
+      <File FileName="Sheet/Location.cs" Line="5" Column="11" />
+      <File FileName="Sheet/Functions.cs" Line="5" Column="11" />
+      <File FileName="Sheet/Expression.cs" Line="4" Column="11" />
+      <File FileName="Sheet/Cell.cs" Line="4" Column="11" />
+      <File FileName="Sheet/AssemblyInfo.cs" Line="8" Column="36" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
