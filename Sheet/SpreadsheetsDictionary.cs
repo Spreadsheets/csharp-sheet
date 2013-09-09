@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace jQuerySheet
+namespace Sheet
 {
 	public class SpreadsheetsDictionary : Dictionary<int, SpreadsheetDictionary>
 	{

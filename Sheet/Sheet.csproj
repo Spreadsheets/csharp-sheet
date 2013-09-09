@@ -44,6 +44,15 @@
     <Compile Include="Spreadsheet.cs" />
     <Compile Include="SpreadsheetDictionary.cs" />
     <Compile Include="SpreadsheetsDictionary.cs" />
+    <Compile Include="Formula\Formula.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Formula\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Formula\formula.jison" />
+    <None Include="Formula\formula.js" />
+    <None Include="Formula\formula.php" />
+  </ItemGroup>
 </Project>
