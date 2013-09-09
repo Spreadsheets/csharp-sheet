@@ -32,6 +32,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -45,10 +48,12 @@
     <Compile Include="SpreadsheetDictionary.cs" />
     <Compile Include="SpreadsheetsDictionary.cs" />
     <Compile Include="Formula\Formula.cs" />
+    <Compile Include="Sheet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Formula\" />
+    <Folder Include="Plugins\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Formula\formula.jison" />
