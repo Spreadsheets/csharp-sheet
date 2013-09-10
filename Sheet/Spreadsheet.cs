@@ -11,12 +11,14 @@ namespace Sheet
         static public int ActiveSpreadsheet = 0;
 		static public SpreadsheetsDictionary Spreadsheets;
 
-
 		public SpreadsheetsDictionary Calc()
 		{
-			foreach (var Spreadsheet in Spreadsheets.Values) {
-				foreach (var row in Spreadsheet.Values) {
-					foreach (var cell in row) {
+			foreach (var spreadsheet in Spreadsheets.Values)
+            {
+                foreach (var row in spreadsheet.Values)
+                {
+					foreach (var cell in row)
+                    {
 						cell.Value.UpdateValue();
 					}
 				}

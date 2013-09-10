@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
 namespace Sheet
@@ -28,7 +29,7 @@ namespace Sheet
 						"}" +
 					"}" +
 				"}]";
-			var jsonDeserialized = js.Deserialize<Sheet> (json);
+			var jsonDeserialized = js.Deserialize<List<Sheet>>(json);
 			Console.WriteLine (jsonDeserialized.ToString());
 		}
 	}
