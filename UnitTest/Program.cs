@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using System.Web.UI;
 using Sheet;
 
 namespace UnitTest
@@ -25,13 +26,23 @@ namespace UnitTest
                     "'metadata':{" +
                         "'widths':['120','120']," +
                         "'frozenAt':{" +
-                            "'row':0," +
-                            "'col':0" +
+                            "'row':1," +
+                            "'col':1" +
                         "}" +
                     "}" +
                 "}]";
-            var jsonDeserialized = js.Deserialize<List<Sheet.Sheet>>(json);
-            Console.WriteLine(jsonDeserialized.ToString());
+
+            var i = 0;
+            while (i++ < 1000)
+            {
+                var jsonDeserialized = js.Deserialize<List<Sheet.Sheet>>(json);
+                Console.WriteLine(jsonDeserialized.ToString());
+
+                var htmlControl = new HtmlTables(jsonDeserialized).ToString();
+                Console.Write(htmlControl);
+            }
+
+            Console.Write("Done!");
         }
     }
 }

@@ -44,6 +44,7 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Functions.cs" />
+    <Compile Include="HtmlTables.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="RowDictionary.cs" />
     <Compile Include="Spreadsheet.cs" />
