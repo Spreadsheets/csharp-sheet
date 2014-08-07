@@ -46,12 +46,10 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Functions.cs" />
-    <Compile Include="HtmlTables.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Row.cs" />
     <Compile Include="Spreadsheet.cs" />
     <Compile Include="Spreadsheets.cs" />
-    <Compile Include="Sheet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

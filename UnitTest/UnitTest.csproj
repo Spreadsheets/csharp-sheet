@@ -56,6 +56,10 @@
       <Project>{CC7545B5-53FB-4BBA-AE81-7AFC768AD2C1}</Project>
       <Name>Sheet</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{dec61db9-0b25-4c68-a867-6bd33094c16a}</Project>
+      <Name>UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

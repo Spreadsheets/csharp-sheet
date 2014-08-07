@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Web.UI;
 
-namespace Sheet
+namespace UI
 {
     public class HtmlTables : Control
     {

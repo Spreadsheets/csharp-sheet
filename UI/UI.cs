@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Sheet
+namespace UI
 {
     [Serializable]
 	public class Column
@@ -13,7 +13,7 @@ namespace Sheet
 	}
 
     [Serializable]
-	public class Row_
+	public class Row
 	{
 		public int height { get; set; }
 		public List<Column> columns { get; set; }
