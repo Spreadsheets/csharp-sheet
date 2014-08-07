@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Formula.cs" />
     <Compile Include="FormulaBase.cs" />
-    <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Expression.cs" />
