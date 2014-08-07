@@ -6,9 +6,9 @@
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CC7545B5-53FB-4BBA-AE81-7AFC768AD2C1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>csharp.sheet</RootNamespace>
-    <AssemblyName>csharp.sheet</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Sheet</RootNamespace>
+    <AssemblyName>Sheet</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>True</DebugSymbols>
@@ -18,7 +18,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Externalconsole>True</Externalconsole>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -27,8 +27,11 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Externalconsole>True</Externalconsole>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,6 +47,7 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Functions.cs" />
+    <Compile Include="HtmlTables.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Row.cs" />
     <Compile Include="Spreadsheet.cs" />
