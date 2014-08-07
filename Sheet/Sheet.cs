@@ -13,7 +13,7 @@ namespace Sheet
 	}
 
     [Serializable]
-	public class Row
+	public class Row_
 	{
 		public int height { get; set; }
 		public List<Column> columns { get; set; }

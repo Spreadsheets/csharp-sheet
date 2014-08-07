@@ -37,17 +37,17 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formula.cs" />
+    <Compile Include="FormulaBase.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="RowDictionary.cs" />
+    <Compile Include="Row.cs" />
     <Compile Include="Spreadsheet.cs" />
-    <Compile Include="SpreadsheetDictionary.cs" />
-    <Compile Include="SpreadsheetsDictionary.cs" />
-    <Compile Include="Formula\Formula.cs" />
+    <Compile Include="Spreadsheets.cs" />
     <Compile Include="Sheet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -55,8 +55,9 @@
     <Folder Include="Plugins\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Formula\formula.jison" />
-    <None Include="Formula\formula.js" />
-    <None Include="Formula\formula.php" />
+    <None Include="formula.jison" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="formula.js" />
   </ItemGroup>
 </Project>
