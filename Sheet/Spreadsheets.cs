@@ -24,6 +24,10 @@ namespace Sheet
 
 		public Expression UpdateCellValue(Cell cell)
         {
+			if (cell == null) {
+				return null;
+			}
+
             if (cell.HasFormula && cell.State.Count < 1)
             {
                 cell.State.Push("Parsing");
@@ -39,9 +43,7 @@ namespace Sheet
 
 		public Expression CellValue(int spreadsheet, int row, int col)
 	    {
-            Cell cell = Values.ElementAt(spreadsheet)
-                .Values.ElementAt(row)
-                .Values.ElementAt(col);
+			Cell cell = CellAt (spreadsheet, row, col);
 
             var value = UpdateCellValue(cell);
             return value;
@@ -49,9 +51,7 @@ namespace Sheet
 
 		public Expression CellValue(Location loc)
         {
-            Cell cell = Values.ElementAt(loc.Sheet)
-                .Values.ElementAt(loc.Row)
-                .Values.ElementAt(loc.Col);
+			Cell cell = CellAt (loc);
 
             var value = UpdateCellValue(cell);
             return value;
@@ -66,9 +66,7 @@ namespace Sheet
                 for (var col = locStart.Col; col <= locEnd.Col; col++)
                 {
                     range.Push(
-                        Values.ElementAt(locStart.Sheet)
-                            .Values.ElementAt(row)
-                            .Values.ElementAt(col).UpdateValue()
+						CellAt(locStart.Sheet, row, col).UpdateValue()
                     );
                 }
             }
@@ -84,5 +82,37 @@ namespace Sheet
             Add(SpreadsheetIndex, spreadsheet);
             return spreadsheet;
 	    }
+
+		public Cell CellAt(Location loc)
+		{
+			return CellAt (loc.Sheet, loc.Row, loc.Col);
+		}
+		
+		public Cell CellAt(int sheet, int row, int col) {
+			Spreadsheet spreadsheet = null;
+			Row _row = null;
+			Cell cell = null;
+
+
+			if (this.ContainsKey (sheet)) {
+				spreadsheet = this[sheet];
+			} else {
+				return null;
+			}
+
+			if (spreadsheet.ContainsKey(row)) {
+				_row = spreadsheet[row];
+			} else {
+				return null;
+			}
+
+			if (_row.ContainsKey (col)) {
+				cell = _row[col];
+			} else {
+				return null;
+			}
+
+			return cell;
+		}
     }
 }

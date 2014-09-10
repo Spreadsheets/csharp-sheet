@@ -1,25 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Sheet/Formula/Formula.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="UnitTest/Program.cs">
     <Files>
-      <File FileName="Sheet/Main.cs" Line="4" Column="2" />
-      <File FileName="Sheet/Spreadsheet.cs" Line="6" Column="1" />
-      <File FileName="Sheet/SpreadsheetDictionary.cs" Line="9" Column="28" />
-      <File FileName="Sheet/SpreadsheetsDictionary.cs" Line="4" Column="11" />
-      <File FileName="Sheet/RowDictionary.cs" Line="4" Column="11" />
-      <File FileName="Sheet/Location.cs" Line="5" Column="11" />
-      <File FileName="Sheet/Functions.cs" Line="5" Column="11" />
-      <File FileName="Sheet/Expression.cs" Line="4" Column="1" />
-      <File FileName="Sheet/Cell.cs" Line="48" Column="18" />
-      <File FileName="Sheet/Formula/Formula.cs" Line="2579" Column="42" />
-      <File FileName="Sheet/Formula/formula.jison" Line="4" Column="11" />
-      <File FileName="Sheet/Formula/formula.js" Line="1" Column="1" />
-      <File FileName="Sheet/Formula/formula.php" Line="1" Column="1" />
+      <File FileName="UnitTest/Program.cs" Line="54" Column="72" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/home/robert/Projects/csharp-sheet/Sheet/Main.cs" line="9" />
+      <Breakpoint file="/home/robert/Projects/csharp-sheet/Sheet/Main.cs" line="9" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

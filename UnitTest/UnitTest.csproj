@@ -46,10 +46,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="brillio.cs" />
+    <Compile Include="FormulaTester.cs" />
+    <Compile Include="SpreadsheetsTester.cs" />
+    <Compile Include="CellTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sheet\Sheet.csproj">
@@ -57,7 +62,7 @@
       <Name>Sheet</Name>
     </ProjectReference>
     <ProjectReference Include="..\UI\UI.csproj">
-      <Project>{dec61db9-0b25-4c68-a867-6bd33094c16a}</Project>
+      <Project>{DEC61DB9-0B25-4C68-A867-6BD33094C16A}</Project>
       <Name>UI</Name>
     </ProjectReference>
   </ItemGroup>

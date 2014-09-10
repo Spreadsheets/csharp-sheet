@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using System.Web.UI;
 using Sheet;
 using UI;
@@ -10,7 +9,7 @@ namespace UnitTest
     {
         static void Main(string[] args)
         {
-            var js = new JavaScriptSerializer();
+            /*var js = new JavaScriptSerializer();
             var json =
                 "[{" +
                     "'title':'simple table 1'," +
@@ -42,8 +41,9 @@ namespace UnitTest
                 Console.Write(htmlControl);
             }
 
-            Console.Write("Done!");
-
+            Console.Write("Done!");*/
+			var b = new brillio ();
+			b.TestCase ();
 
             var spreadsheets = new Spreadsheets();
             var spreadsheet = spreadsheets.AddSpreadsheet();

@@ -14,11 +14,11 @@
 									{return 'TIME_AMPM';}
 ([0]?[0-9]|1[0-9]|2[0-3])[:][0-5][0-9]([:][0-5][0-9])?
 									{return 'TIME_24';}
-'SHEET'[0-9]+
+[A-Za-z]+[0-9]+
 %{
 	//js
-	if (yy.obj.type == 'cell') return 'SHEET';
-	return 'VARIABLE';
+		if (yy.obj.type == 'cell') return 'SHEET';
+		return 'VARIABLE';
 	
 	/*php
 		if ($this->type == 'cell') return 'SHEET';
@@ -27,14 +27,30 @@
 	
 	/*cs
 		return 'SHEET';
-		//return 'VARIABLE';
 	*/
 %}
-'$'[A-Za-z]+'$'[0-9]+
+
+[A-Za-z]+[0-9]+
 %{
 	//js
-	if (yy.obj.type == 'cell') return 'FIXEDCELL';
-	return 'VARIABLE';
+		if (yy.obj.type == 'cell') return 'SHEET';
+		return 'VARIABLE';
+	
+	/*php
+		if ($this->type == 'cell') return 'SHEET';
+		return 'VARIABLE';
+	*/
+	
+	/*cs
+		return 'SHEET';
+	*/
+%}
+
+[$][A-Za-z]+[$][0-9]+
+%{
+	//js
+		if (yy.obj.type == 'cell') return 'FIXEDCELL';
+		return 'VARIABLE';
 
 	/*php
 		if ($this->type == 'cell') return 'FIXEDCELL';
@@ -43,14 +59,13 @@
 	
 	/*cs
 		return 'FIXEDCELL';
-		//return 'VARIABLE';
 	*/
 %}
 [A-Za-z]+[0-9]+
 %{
 	//js
-	if (yy.obj.type == 'cell') return 'CELL';
-	return 'VARIABLE';
+		if (yy.obj.type == 'cell') return 'CELL';
+		return 'VARIABLE';
 
 	/*php
 		if ($this->type == 'cell') return 'CELL';
@@ -59,7 +74,6 @@
 	
 	/*cs
 		return 'CELL';
-		//return 'VARIABLE';
 	*/
 %}
 [A-Za-z]+(?=[(])    				{return 'FUNCTION';}
@@ -107,239 +121,240 @@
 
 %% /* language grammar */
 
-expressions
-: expression EOF
-     {return $1;}
- ;
+expressions :
+	expression EOF
+    {
+    	return $1;
+    };
 
 expression :
 	variableSequence
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.variable.apply(yy.obj, $1);
-            
-			//php $$ = $this->variable($1);
-			
-			/*cs
-				$$ = $1;
-			*/
-		}
+        
+		//php $$ = $this->variable($1);
+		
+		/*cs
+			$$ = $1;
+		*/
+	}
 	| TIME_AMPM
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.time.apply(yy.obj, [$1, true]);
-			//
-		}
+		//
+	}
 	| TIME_24
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.time.apply(yy.obj, [$1]);
-			//
-		}
+		//
+	}
 	| number
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.number.apply(yy.obj, [$1]);
-			
-			//php $$ = $1 * 1;
-			
-			/*cs
-				$1.ToDouble();
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = $1 * 1;
+		
+		/*cs
+			$1.ToDouble();
+			$$ = $1;
+		*/
+	}
 	| STRING
-		{
-			//js
+	{
+		//js
 			$$ = $1.substring(1, $1.length - 1);
-			
-			//php $$ = substr($1, 1, -1);
-			
-			/*cs
-				$1.ToString();
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = substr($1, 1, -1);
+		
+		/*cs
+			$1.ToString();
+			$$ = $1;
+		*/
+	}
 	| expression '=' expression
-		{
-			//js
+	{
+		//js
 			yy.obj.html.pop();
 			$$ = yy.handler.callFunction.apply(yy.obj, ['EQUAL', [$1, $3]]);
-			
-			//php $$ = $1 == $3;
-			
-			/*cs
-				$1.Set($1.Text == $3.Text);
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = $1 == $3;
+		
+		/*cs
+			$1.Set($1.Text == $3.Text);
+			$$ = $1;
+		*/
+	}
 	| expression '+' expression
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.performMath.apply(yy.obj, ['+', $1, $3]);
 			yy.obj.html.pop();
 			yy.obj.html.pop();
 			yy.obj.html.push(null);
 
-			/*php
-				if (is_numeric($1) && is_numeric($3)) {
-					$$ = $1 + $3;
-				} else {
-					$$ = $1 . $3;
-				}
-			*/
-			
-			/*cs
-				if ($1.IsNumeric()) {
-					$1.ToDouble();
-					$1.Add($3);
-					$$ = $1;
-				} else {
-					$1.ToString();
-					$1.Concat($3);
-					$$ = $1;
-				}
-			*/
-		}
+		/*php
+			if (is_numeric($1) && is_numeric($3)) {
+				$$ = $1 + $3;
+			} else {
+				$$ = $1 . $3;
+			}
+		*/
+		
+		/*cs
+			if ($1.IsNumeric()) {
+				$1.ToDouble();
+				$1.Add($3);
+				$$ = $1;
+			} else {
+				$1.ToString();
+				$1.Concat($3);
+				$$ = $1;
+			}
+		*/
+	}
 	| '(' expression ')'
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.number.apply(yy.obj, [$2]);
-			
-			/*cs
-				$$ = $2;
-			*/
-		}
+		
+		/*cs
+			$$ = $2;
+		*/
+	}
 	| expression '<' '=' expression
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.callFunction.apply(yy.obj, ['LESS_EQUAL', [$1, $3]]);
-			
-			//php $$ = ($1 * 1) <= ($4 * 1);
-			
-			/*cs
-				$1.Set($1.ToDouble() <= $4.ToDouble());
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = ($1 * 1) <= ($4 * 1);
+		
+		/*cs
+			$1.Set($1.ToDouble() <= $4.ToDouble());
+			$$ = $1;
+		*/
+	}
 	| expression '>' '=' expression
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.callFunction.apply(yy.obj, ['GREATER_EQUAL', [$1, $3]]);
-			
-			//php $$ = ($1 * 1) >= ($4 * 1);
-			
-			/*cs
-				$1.Set($1.ToDouble() >= $4.ToDouble());
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = ($1 * 1) >= ($4 * 1);
+		
+		/*cs
+			$1.Set($1.ToDouble() >= $4.ToDouble());
+			$$ = $1;
+		*/
+	}
 	| expression '<' '>' expression
-		{
-			//js|php
+	{
+		//js|php
 			$$ = ($1 * 1) != ($4 * 1);
-			
-			//js
+		
+		//js
 			if (isNaN($$)) $$ = 0;
 			yy.obj.html.pop();
 			yy.obj.html.pop();
 			yy.obj.html.push(null);
-			//
-			
-			/*cs
-				$1.Set($1.Text != $4.Text);
-				$$ = $1;
-			*/
-		}
+		//
+		
+		/*cs
+			$1.Set($1.Text != $4.Text);
+			$$ = $1;
+		*/
+	}
 	| expression NOT expression
-		{
-			//js|php
+	{
+		//js|php
 			$$ = $1 != $3;
 
-			//js
+		//js
 			yy.obj.html.pop();
 			yy.obj.html.pop();
 			yy.obj.html.push(null);
-			//
-			
-			/*cs
-				$1.Set($1.Text != $3.Text);
-				$$ = $1;
-			*/
-		}
+		//
+		
+		/*cs
+			$1.Set($1.Text != $3.Text);
+			$$ = $1;
+		*/
+	}
 	| expression '>' expression
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.callFunction.apply(yy.obj, ['GREATER', [$1, $3]]);
-			
-			//php $$ = ($1 * 1) > ($3 * 1);
-			
-			/*cs
-				$1.Set($1.ToDouble() > $3.ToDouble());
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = ($1 * 1) > ($3 * 1);
+		
+		/*cs
+			$1.Set($1.ToDouble() > $3.ToDouble());
+			$$ = $1;
+		*/
+	}
 	| expression '<' expression
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.callFunction.apply(yy.obj, ['LESS', [$1, $3]]);
-			
-			//php $$ = ($1 * 1) < ($3 * 1);
-			
-			/*cs
-				$1.Set($1.ToDouble() < $3.ToDouble());
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = ($1 * 1) < ($3 * 1);
+		
+		/*cs
+			$1.Set($1.ToDouble() < $3.ToDouble());
+			$$ = $1;
+		*/
+	}
 	| expression '-' expression
-		{
-			//js|php
+	{
+		//js|php
 			$$ = ($1 * 1) - ($3 * 1);
 
-			//js
+		//js
 			$$ = yy.handler.performMath.apply(yy.obj, ['-', $1, $3]);
 			yy.obj.html.pop();
 			yy.obj.html.pop();
 			yy.obj.html.push(null);
-			
-			/*cs
-				$1.Set($1.ToDouble() - $3.ToDouble());
-				$$ = $1;
-			*/
-		}
+		
+		/*cs
+			$1.Set($1.ToDouble() - $3.ToDouble());
+			$$ = $1;
+		*/
+	}
 	| expression '*' expression
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.performMath.apply(yy.obj, ['*', $1, $3]);
 			yy.obj.html.pop();
 			yy.obj.html.pop();
 			yy.obj.html.push(null);
-			
-			//php $$ = ($1 * 1) * ($3 * 1);
-			
-			/*cs
-				$1.Set($1.ToDouble() * $3.ToDouble());
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = ($1 * 1) * ($3 * 1);
+		
+		/*cs
+			$1.Set($1.ToDouble() * $3.ToDouble());
+			$$ = $1;
+		*/
+	}
 	| expression '/' expression
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.performMath.apply(yy.obj, ['/', $1, $3]);
 			yy.obj.html.pop();
 			yy.obj.html.pop();
 			yy.obj.html.push(null);
-			
-			//php $$ = ($1 * 1) / ($3 * 1);
-			
-			/*cs
-				$1.Set($1.ToDouble() / $3.ToDouble());
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = ($1 * 1) / ($3 * 1);
+		
+		/*cs
+			$1.Set($1.ToDouble() / $3.ToDouble());
+			$$ = $1;
+		*/
+	}
 	| expression '^' expression
-		{
-			//js
+	{
+		//js
 			var n1 = yy.handler.number.apply(yy.obj, [$1]),
 				n2 = yy.handler.number.apply(yy.obj, [$3]);
 
@@ -348,279 +363,273 @@ expression :
 			yy.obj.html.pop();
 			yy.obj.html.push(null);
 
-			//php $$ = pow(($1 * 1), ($3 * 1));
-			
-			/*cs
-				$1.Set(Math.Pow($1.ToDouble(), $3.ToDouble()));
-				$$ = $1;
-			*/
-		}
+		//php $$ = pow(($1 * 1), ($3 * 1));
+		
+		/*cs
+			$1.Set(Math.Pow($1.ToDouble(), $3.ToDouble()));
+			$$ = $1;
+		*/
+	}
 	| '-' expression
-		{
-			//js
+	{
+		//js
 			var n1 = yy.handler.number.apply(yy.obj, [$2]);
 			$$ = n1 * -1;
 			if (isNaN($$)) $$ = 0;
 
-			//php $$ = $1 * 1;
-			
-			/*cs
-				$2.Set(-$2.ToDouble());
-				$$ = $2;
-			*/
-		}
+		//php $$ = $1 * 1;
+		
+		/*cs
+			$2.Set(-$2.ToDouble());
+			$$ = $2;
+		*/
+	}
 	| '+' expression
-		{
-			//js
+	{
+		//js
 			var n1 = yy.handler.number.apply(yy.obj, [$2]);
 			$$ = n1 * 1;
 			if (isNaN($$)) $$ = 0;
 
-			//php $$ = $1 * 1;
-			
-			/*cs
-				$2.Set($2.ToDouble());
-				$$ = $2;
-			*/
-		}
+		//php $$ = $1 * 1;
+		
+		/*cs
+			$2.Set($2.ToDouble());
+			$$ = $2;
+		*/
+	}
 	| E
-		{/*$$ = Math.E;*/;}
+	{/*$$ = Math.E;*/;}
 	| FUNCTION '(' ')'
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.callFunction.apply(yy.obj, [$1, '']);
-			
-			//php $$ = $this->callFunction($1);
-			
-			/*cs
-				$$ = Functions.Call($1.Text);
-			*/
-		}
+		
+		//php $$ = $this->callFunction($1);
+		
+		/*cs
+			$$ = Functions.Call($1.Text);
+		*/
+	}
 	| FUNCTION '(' expseq ')'
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.callFunction.apply(yy.obj, [$1, $3]);
-			
-			//php $$ = $this->callFunction($1, $3);
-			
-			/*cs
-				$$ = Functions.Call($1.Text, $3);
-			*/
-		}
+		
+		//php $$ = $this->callFunction($1, $3);
+		
+		/*cs
+			$$ = Functions.Call($1.Text, $3);
+		*/
+	}
 	| cell
 	| error
-	| error error
-;
+	| error error;
 
 cell :
 	FIXEDCELL
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.fixedCellValue.apply(yy.obj, [$1]);
-			
-			//php $$ = $this->fixedCellValue($1);
-			
-			/*cs
-				$$ = MySpreadsheets.CellValue(MySpreadsheet.ParseFixed($1.Text));
-			*/
-		}
+		
+		//php $$ = $this->fixedCellValue($1);
+		
+		/*cs
+			$$ = MySpreadsheets.CellValue(MySpreadsheet.ParseFixed($1.Text));
+		*/
+	}
 	| FIXEDCELL ':' FIXEDCELL
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.fixedCellRangeValue.apply(yy.obj, [$1, $3]);
-			
-			//php $$ = $this->fixedCellRangeValue($1, $3);
-			
-			/*cs
-				$$ = MySpreadsheets.CellValue(MySpreadsheet.ParseFixed($1.Text), MySpreadsheet.ParseFixed($3.Text));
-			*/
-		}
+		
+		//php $$ = $this->fixedCellRangeValue($1, $3);
+		
+		/*cs
+			$$ = MySpreadsheets.CellValue(MySpreadsheet.ParseFixed($1.Text), MySpreadsheet.ParseFixed($3.Text));
+		*/
+	}
 	| CELL
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.cellValue.apply(yy.obj, [$1]);
-			
-			//php $$ = $this->cellValue($1);
-			
-			/*cs
-				$$ = MySpreadsheets.CellValue(MySpreadsheet.Parse($1.Text));
-			*/
-		}
+		
+		//php $$ = $this->cellValue($1);
+		
+		/*cs
+			$$ = MySpreadsheets.CellValue(MySpreadsheet.Parse($1.Text));
+		*/
+	}
 	| CELL ':' CELL
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.cellRangeValue.apply(yy.obj, [$1, $3]);
-			
-			//php $$ = $this->cellRangeValue($1, $3);
-			
-			/*cs
-				$$ = MySpreadsheets.CellValue(MySpreadsheet.Parse($1.Text), MySpreadsheet.Parse($3.Text));
-			*/
-		}
+		
+		//php $$ = $this->cellRangeValue($1, $3);
+		
+		/*cs
+			$$ = MySpreadsheets.CellValue(MySpreadsheet.Parse($1.Text), MySpreadsheet.Parse($3.Text));
+		*/
+	}
 	| SHEET '!' CELL
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.remoteCellValue.apply(yy.obj, [$1, $3]);
-			
-			//php $$ = $this->remoteCellValue($1, $3);
-			
-			/*cs
-				$$ = MySpreadsheets.CellValue(MySpreadsheet.ParseRemote($1.Text, $3.Text));
-			*/
-		}
+		
+		//php $$ = $this->remoteCellValue($1, $3);
+		
+		/*cs
+			$$ = MySpreadsheets.CellValue(MySpreadsheet.ParseRemote($1.Text, $3.Text));
+		*/
+	}
 	| SHEET '!' CELL ':' CELL
-		{
-			//js
+	{
+		//js
 			$$ = yy.handler.remoteCellRangeValue.apply(yy.obj, [$1, $3, $5]);
-			
-			//php $$ = $this->remoteCellRangeValue($1, $3, $5);
-			
-			/*cs
-				$$ = MySpreadsheets.CellValue(MySpreadsheet.ParseRemote($1.Text, $3.Text), MySpreadsheet.ParseRemote($1.Text, $5.Text));
-			*/
-		}
-;
+		
+		//php $$ = $this->remoteCellRangeValue($1, $3, $5);
+		
+		/*cs
+			$$ = MySpreadsheets.CellValue(MySpreadsheet.ParseRemote($1.Text, $3.Text), MySpreadsheet.ParseRemote($1.Text, $5.Text));
+		*/
+	};
 
 expseq : 
 	expression
-		{
-			//js
+	{
+		//js
 			$$ = [$1];
-			
-			//php $$ = array($1);
-			
-			/*cs
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = array($1);
+		
+		/*cs
+			$$ = $1;
+		*/
+	}
 	| expseq ';' expression
-	    {
-			//js
+    {
+		//js
 	        $1.push($3);
 	        $$ = $1;
 
-			/*php
-				$1[] = $3;
-				$$ = $1;
-			*/
-			
-			/*cs
-				$1.Push($3);
-				$$ = $1;
-			*/
-	    }
+		/*php
+			$1[] = $3;
+			$$ = $1;
+		*/
+		
+		/*cs
+			$1.Push($3);
+			$$ = $1;
+		*/
+    }
  	| expseq ',' expression
-		{
-			//js
+	{
+		//js
 	        $1.push($3);
 	        $$ = $1;
 
-			/*php
-				$1[] = $3;
-				$$ = $1;
-			*/
-			
-			/*cs
-				$1.Push($3);
-				$$ = $1;
-			*/
-	    }
- ;
+		/*php
+			$1[] = $3;
+			$$ = $1;
+		*/
+		
+		/*cs
+			$1.Push($3);
+			$$ = $1;
+		*/
+    };
 
 
 variableSequence :
 	VARIABLE
-		{
-			//js
+	{
+		//js
 			$$ = [$1];
-			
-			//php $$ = array($1);
-			
-			/*cs
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = array($1);
+		
+		/*cs
+			$$ = $1;
+		*/
+	}
 	| variableSequence DECIMAL VARIABLE
-		{
-			//js
+	{
+		//js
 			$$ = ($.isArray($1) ? $1 : [$1]);
             $$.push($3);
 
-            /*php
-				$$ = (is_array($1) ? $1 : array());
-				$$[] = $3;
-			*/
-			
-			/*cs
-				$1.Push($3);
-				$$ = $1;
-			*/
-		}
-;
+        /*php
+			$$ = (is_array($1) ? $1 : array());
+			$$[] = $3;
+		*/
+		
+		/*cs
+			$1.Push($3);
+			$$ = $1;
+		*/
+	};
 
 number :
 	NUMBER
-		{
-			//js|php
+	{
+		//js|php
 			$$ = $1 * 1;
-			
-			/*cs
-				$1.ToDouble();
-				$$ = $1;
-			*/
-		}
+		
+		/*cs
+			$1.ToDouble();
+			$$ = $1;
+		*/
+	}
 	| NUMBER DECIMAL NUMBER
-		{
-			//js
+	{
+		//js
 			$$ =($1 + '.' + $3) * 1;
-			
-			//php $$ = $1 . '.' . $3;
-			
-			/*cs
-				$1.Text += "." + $3.Text;
-				$1.ToDouble();
-				$$ = $1;
-			*/
-		}
+		
+		//php $$ = $1 . '.' . $3;
+		
+		/*cs
+			$1.Text += "." + $3.Text;
+			$1.ToDouble();
+			$$ = $1;
+		*/
+	}
 	| number '%'
-		{
-			//js
+	{
+		//js
 			yy.obj.html.push($1 + $2);
-			
-			//js|php
+		
+		//js|php
 			$$ = $1 * 0.01;
-			
-			/*cs
-				$1.Set($1.ToDouble() * 0.01);
-				$$ = $1;
-			*/
-		}
-;
+		
+		/*cs
+			$1.Set($1.ToDouble() * 0.01);
+			$$ = $1;
+		*/
+	};
 
 error :
 	'#' VARIABLE '!' {
-			//js
+		//js
 			$$ = $1 + $2 + $3;
-			
-			//php $$ = $1 . $2 . $3;
-			
-			/*cs
-				$1.Set($1.Text + $2.Text + $3.Text);
-				$$ = $1;
-			*/
-      	}
+		
+		//php $$ = $1 . $2 . $3;
+		
+		/*cs
+			$1.Set($1.Text + $2.Text + $3.Text);
+			$$ = $1;
+		*/
+  	}
     | VARIABLE '#' VARIABLE '!' {
-			//js
+		//js
 			$$ = $2 + $3 + $4;
-			
-			//php $$ = $2 . $3 . $4;
-			
-			/*cs
-				$1.Set($1.Text + $2.Text + $3.Text + $4.Text);
-				$$ = $1;
-			*/
-		}
-;
+		
+		//php $$ = $2 . $3 . $4;
+		
+		/*cs
+			$1.Set($1.Text + $2.Text + $3.Text + $4.Text);
+			$$ = $1;
+		*/
+	};
 
 %%
 if (typeof(window) !== 'undefined') {

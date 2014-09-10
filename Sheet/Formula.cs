@@ -1736,41 +1736,42 @@ namespace Sheet
 					{3, new Regex(@"\G(?:[A-Za-z]{1,}[A-Za-z_0-9]+(?=[(]))")},
 					{4, new Regex(@"\G(?:([0]?[1-9]|1[0-2])[:][0-5][0-9]([:][0-5][0-9])?[ ]?(AM|am|aM|Am|PM|pm|pM|Pm))")},
 					{5, new Regex(@"\G(?:([0]?[0-9]|1[0-9]|2[0-3])[:][0-5][0-9]([:][0-5][0-9])?)")},
-					{6, new Regex(@"\G(?:SHEET[0-9]+)")},
-					{7, new Regex(@"\G(?:\$[A-Za-z]+\$[0-9]+)")},
-					{8, new Regex(@"\G(?:[A-Za-z]+[0-9]+)")},
-					{9, new Regex(@"\G(?:[A-Za-z]+(?=[(]))")},
-					{10, new Regex(@"\G(?:[A-Za-z]{1,}[A-Za-z_0-9]+)")},
-					{11, new Regex(@"\G(?:[A-Za-z_]+)")},
-					{12, new Regex(@"\G(?:[0-9]+)")},
-					{13, new Regex(@"\G(?:\\s)")},
-					{14, new Regex(@"\G(?:[.])")},
-					{15, new Regex(@"\G(?::)")},
-					{16, new Regex(@"\G(?:;)")},
-					{17, new Regex(@"\G(?:,)")},
-					{18, new Regex(@"\G(?:\*)")},
-					{19, new Regex(@"\G(?:\/)")},
-					{20, new Regex(@"\G(?:-)")},
-					{21, new Regex(@"\G(?:\+)")},
-					{22, new Regex(@"\G(?:\^)")},
-					{23, new Regex(@"\G(?:\()")},
-					{24, new Regex(@"\G(?:\))")},
-					{25, new Regex(@"\G(?:>)")},
-					{26, new Regex(@"\G(?:<)")},
-					{27, new Regex(@"\G(?:NOT\b)")},
-					{28, new Regex(@"\G(?:E\b)")},
-					{29, new Regex(@"\G(?:"")")},
-					{30, new Regex(@"\G(?:')")},
-					{31, new Regex(@"\G(?:!)")},
-					{32, new Regex(@"\G(?:=)")},
-					{33, new Regex(@"\G(?:%)")},
-					{34, new Regex(@"\G(?:[#])")},
-					{35, new Regex(@"\G(?:$)")}
+					{6, new Regex(@"\G(?:[A-Za-z]+[0-9]+)")},
+					{7, new Regex(@"\G(?:[A-Za-z]+[0-9]+)")},
+					{8, new Regex(@"\G(?:[$][A-Za-z]+[$][0-9]+)")},
+					{9, new Regex(@"\G(?:[A-Za-z]+[0-9]+)")},
+					{10, new Regex(@"\G(?:[A-Za-z]+(?=[(]))")},
+					{11, new Regex(@"\G(?:[A-Za-z]{1,}[A-Za-z_0-9]+)")},
+					{12, new Regex(@"\G(?:[A-Za-z_]+)")},
+					{13, new Regex(@"\G(?:[0-9]+)")},
+					{14, new Regex(@"\G(?:\\s)")},
+					{15, new Regex(@"\G(?:[.])")},
+					{16, new Regex(@"\G(?::)")},
+					{17, new Regex(@"\G(?:;)")},
+					{18, new Regex(@"\G(?:,)")},
+					{19, new Regex(@"\G(?:\*)")},
+					{20, new Regex(@"\G(?:\/)")},
+					{21, new Regex(@"\G(?:-)")},
+					{22, new Regex(@"\G(?:\+)")},
+					{23, new Regex(@"\G(?:\^)")},
+					{24, new Regex(@"\G(?:\()")},
+					{25, new Regex(@"\G(?:\))")},
+					{26, new Regex(@"\G(?:>)")},
+					{27, new Regex(@"\G(?:<)")},
+					{28, new Regex(@"\G(?:NOT\b)")},
+					{29, new Regex(@"\G(?:E\b)")},
+					{30, new Regex(@"\G(?:"")")},
+					{31, new Regex(@"\G(?:')")},
+					{32, new Regex(@"\G(?:!)")},
+					{33, new Regex(@"\G(?:=)")},
+					{34, new Regex(@"\G(?:%)")},
+					{35, new Regex(@"\G(?:[#])")},
+					{36, new Regex(@"\G(?:$)")}
 				};
 
 			Conditions = new Dictionary<string, LexerConditions>
 				{
-					{"INITIAL", new LexerConditions(new List<int> { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 }, true)}
+					{"INITIAL", new LexerConditions(new List<int> { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36 }, true)}
 				};
 
 
@@ -1783,327 +1784,348 @@ namespace Sheet
 
 
 switch (yystate) {
-case 1:return ss[so-1];
+case 1:
+
+    	return ss[so-1];
+    
 break;
 case 2:
-			
-			
-			
-				thisS = ss[so];
-			
+
 		
+		
+		
+			thisS = ss[so];
+		
+	
 break;
 case 3:
-			//
-		
+
+			
 break;
 case 4:
-			//
-		
+
+			
 break;
 case 5:
-			
-			
-			
-				ss[so].ToDouble();
-				thisS = ss[so];
-			
+
 		
+		
+		
+			ss[so].ToDouble();
+			thisS = ss[so];
+		
+	
 break;
 case 6:
-			
-			
-			
-				ss[so].ToString();
-				thisS = ss[so];
-			
+
 		
+		
+		
+			ss[so].ToString();
+			thisS = ss[so];
+		
+	
 break;
 case 7:
-			
-			
-			
-				ss[so-2].Set(ss[so-2].Text == ss[so].Text);
-				thisS = ss[so-2];
-			
+
 		
+		
+		
+			ss[so-2].Set(ss[so-2].Text == ss[so].Text);
+			thisS = ss[so-2];
+		
+	
 break;
 case 8:
-			
-			
-			
-				if (ss[so-2].IsNumeric()) {
-					ss[so-2].ToDouble();
-					ss[so-2].Add(ss[so]);
-					thisS = ss[so-2];
-				} else {
-					ss[so-2].ToString();
-					ss[so-2].Concat(ss[so]);
-					thisS = ss[so-2];
-				}
-			
+
 		
+		
+		
+			if (ss[so-2].IsNumeric()) {
+				ss[so-2].ToDouble();
+				ss[so-2].Add(ss[so]);
+				thisS = ss[so-2];
+			} else {
+				ss[so-2].ToString();
+				ss[so-2].Concat(ss[so]);
+				thisS = ss[so-2];
+			}
+		
+	
 break;
 case 9:
-			//
-                thisS = ss[so - 1];
+
+		
+			thisS = ss[so-1];
+		
+	
 break;
 case 10:
-			
-			
-			
-				ss[so-3].Set(ss[so-3].ToDouble() <= ss[so].ToDouble());
-				thisS = ss[so-3];
-			
+
 		
+		
+		
+			ss[so-3].Set(ss[so-3].ToDouble() <= ss[so].ToDouble());
+			thisS = ss[so-3];
+		
+	
 break;
 case 11:
-			
-			
-			
-				ss[so-3].Set(ss[so-3].ToDouble() >= ss[so].ToDouble());
-				thisS = ss[so-3];
-			
+
 		
+		
+		
+			ss[so-3].Set(ss[so-3].ToDouble() >= ss[so].ToDouble());
+			thisS = ss[so-3];
+		
+	
 break;
 case 12:
-			//
-			
-			
-				ss[so-3].Set(ss[so-3].Text != ss[so].Text);
-				thisS = ss[so-3];
-			
+
+				
 		
+			ss[so-3].Set(ss[so-3].Text != ss[so].Text);
+			thisS = ss[so-3];
+		
+	
 break;
 case 13:
-			//
-			
-			
-				ss[so-2].Set(ss[so-2].Text != ss[so].Text);
-				thisS = ss[so-2];
-			
+
+				
 		
+			ss[so-2].Set(ss[so-2].Text != ss[so].Text);
+			thisS = ss[so-2];
+		
+	
 break;
 case 14:
-			
-			
-			
-				ss[so-2].Set(ss[so-2].ToDouble() > ss[so].ToDouble());
-				thisS = ss[so-2];
-			
+
 		
+		
+		
+			ss[so-2].Set(ss[so-2].ToDouble() > ss[so].ToDouble());
+			thisS = ss[so-2];
+		
+	
 break;
 case 15:
-			
-			
-			
-				ss[so-2].Set(ss[so-2].ToDouble() < ss[so].ToDouble());
-				thisS = ss[so-2];
-			
+
 		
+		
+		
+			ss[so-2].Set(ss[so-2].ToDouble() < ss[so].ToDouble());
+			thisS = ss[so-2];
+		
+	
 break;
 case 16:
-			
-				ss[so-2].Set(ss[so-2].ToDouble() - ss[so].ToDouble());
-				thisS = ss[so-2];
-			
+
 		
+			ss[so-2].Set(ss[so-2].ToDouble() - ss[so].ToDouble());
+			thisS = ss[so-2];
+		
+	
 break;
 case 17:
-			
-			
-			
-				ss[so-2].Set(ss[so-2].ToDouble() * ss[so].ToDouble());
-				thisS = ss[so-2];
-			
+
 		
+		
+		
+			ss[so-2].Set(ss[so-2].ToDouble() * ss[so].ToDouble());
+			thisS = ss[so-2];
+		
+	
 break;
 case 18:
-			
-			
-			
-				ss[so-2].Set(ss[so-2].ToDouble() / ss[so].ToDouble());
-				thisS = ss[so-2];
-			
+
 		
+		
+		
+			ss[so-2].Set(ss[so-2].ToDouble() / ss[so].ToDouble());
+			thisS = ss[so-2];
+		
+	
 break;
 case 19:
-			
-			
-			
-				ss[so-2].Set(Math.Pow(ss[so-2].ToDouble(), ss[so].ToDouble()));
-				thisS = ss[so-2];
-			
+
 		
+		
+		
+			ss[so-2].Set(Math.Pow(ss[so-2].ToDouble(), ss[so].ToDouble()));
+			thisS = ss[so-2];
+		
+	
 break;
 case 20:
-			
-			
-			
-				ss[so].Set(-ss[so].ToDouble());
-				thisS = ss[so];
-			
+
 		
+		
+		
+			ss[so].Set(-ss[so].ToDouble());
+			thisS = ss[so];
+		
+	
 break;
 case 21:
-			
-			
-			
-				ss[so].Set(ss[so].ToDouble());
-				thisS = ss[so];
-			
+
 		
+		
+		
+			ss[so].Set(ss[so].ToDouble());
+			thisS = ss[so];
+		
+	
 break;
-case 22:;
+case 22:
+;
 break;
 case 23:
-			
-			
-			
-				thisS = Functions.Call(ss[so-2].Text);
-			
+
 		
+		
+		
+			thisS = Functions.Call(ss[so-2].Text);
+		
+	
 break;
 case 24:
-			
-			
-			
-				thisS = Functions.Call(ss[so-3].Text, ss[so-1]);
-			
+
 		
+		
+		
+			thisS = Functions.Call(ss[so-3].Text, ss[so-1]);
+		
+	
 break;
 case 28:
-			
-			
-			
-				thisS = MySpreadsheets.CellValue(MySpreadsheet.ParseFixed(ss[so].Text));
-			
+
 		
+		
+		
+			thisS = MySpreadsheets.CellValue(MySpreadsheet.ParseFixed(ss[so].Text));
+		
+	
 break;
 case 29:
 
-
-
-                thisS = MySpreadsheets.CellValue(MySpreadsheet.ParseFixed(ss[so - 2].Text), MySpreadsheet.ParseFixed(ss[so].Text));
-			
 		
+		
+		
+			thisS = MySpreadsheets.CellValue(MySpreadsheet.ParseFixed(ss[so-2].Text), MySpreadsheet.ParseFixed(ss[so].Text));
+		
+	
 break;
 case 30:
 
-
-
-                thisS = MySpreadsheets.CellValue(MySpreadsheet.Parse(ss[so].Text));
-			
 		
+		
+		
+			thisS = MySpreadsheets.CellValue(MySpreadsheet.Parse(ss[so].Text));
+		
+	
 break;
 case 31:
 
-
-
-                thisS = MySpreadsheets.CellValue(MySpreadsheet.Parse(ss[so - 2].Text), MySpreadsheet.Parse(ss[so].Text));
-			
 		
+		
+		
+			thisS = MySpreadsheets.CellValue(MySpreadsheet.Parse(ss[so-2].Text), MySpreadsheet.Parse(ss[so].Text));
+		
+	
 break;
 case 32:
 
-
-
-                thisS = MySpreadsheets.CellValue(MySpreadsheet.ParseRemote(ss[so - 2].Text, ss[so].Text));
-			
 		
+		
+		
+			thisS = MySpreadsheets.CellValue(MySpreadsheet.ParseRemote(ss[so-2].Text, ss[so].Text));
+		
+	
 break;
 case 33:
 
+		
+		
+		
+			thisS = MySpreadsheets.CellValue(MySpreadsheet.ParseRemote(ss[so-4].Text, ss[so-2].Text), MySpreadsheet.ParseRemote(ss[so-4].Text, ss[so].Text));
+		
+	
+break;
+case 34: case 37:
 
+		
+		
+		
+			thisS = ss[so];
+		
+	
+break;
+case 35: case 36:
 
-                thisS = MySpreadsheets.CellValue(MySpreadsheet.ParseRemote(ss[so - 4].Text, ss[so - 2].Text), MySpreadsheet.ParseRemote(ss[so - 4].Text, ss[so].Text));
-			
 		
-break;
-case 34:
-			
-			
-			
-				thisS = ss[so];
-			
 		
-break;
-case 35:
-			
-			
-			
-				ss[so-2].Push(ss[so]);
-				thisS = ss[so-2];
-			
-	    
-break;
-case 36:
-			
-			
-			
-				ss[so-2].Push(ss[so]);
-				thisS = ss[so-2];
-			
-	    
-break;
-case 37:
-			
-			
-			
-				thisS = ss[so];
-			
 		
+			ss[so-2].Push(ss[so]);
+			thisS = ss[so-2];
+		
+    
 break;
 case 38:
-			
-			
-			
-				ss[so-2].Push(ss[so]);
-				thisS = ss[so-2];
-			
+
 		
+		
+		
+			ss[so-2].Push(ss[so]);
+			thisS = ss[so-2];
+		
+	
 break;
 case 39:
-			
-				ss[so].ToDouble();
-				thisS = ss[so];
-			
+
 		
+			ss[so].ToDouble();
+			thisS = ss[so];
+		
+	
 break;
 case 40:
-			
-			
-			
-				ss[so-2].Text += "." + ss[so].Text;
-				ss[so-2].ToDouble();
-				thisS = ss[so-2];
-			
+
 		
+		
+		
+			ss[so-2].Text += "." + ss[so].Text;
+			ss[so-2].ToDouble();
+			thisS = ss[so-2];
+		
+	
 break;
 case 41:
-			
-				ss[so-1].Set(ss[so-1].ToDouble() * 0.01);
-				thisS = ss[so-1];
-			
+
 		
+			ss[so-1].Set(ss[so-1].ToDouble() * 0.01);
+			thisS = ss[so-1];
+		
+	
 break;
 case 42:
-			
-			
-			
-				ss[so-2].Set(ss[so-2].Text + ss[so-1].Text + ss[so].Text);
-				thisS = ss[so-2];
-			
-      	
+
+		
+		
+		
+			ss[so-2].Set(ss[so-2].Text + ss[so-1].Text + ss[so].Text);
+			thisS = ss[so-2];
+		
+  	
 break;
 case 43:
-			
-			
-			
-				ss[so-3].Set(ss[so-3].Text + ss[so-2].Text + ss[so-1].Text + ss[so].Text);
-				thisS = ss[so-3];
-			
+
 		
+		
+		
+			ss[so-3].Set(ss[so-3].Text + ss[so-2].Text + ss[so-1].Text + ss[so].Text);
+			thisS = ss[so-3];
+		
+	
 break;
 }
 
@@ -2531,7 +2553,6 @@ break;
 		public dynamic LexerPerformAction(int avoidingNameCollisions, string Yy_Start)
 		{
 			
-
 ;
 switch(avoidingNameCollisions) {
 case 0:/* skip whitespace */
@@ -2551,7 +2572,6 @@ case 6:
 	
 	
 		return 29;
-		//return 33;
 	
 
 break;
@@ -2559,8 +2579,7 @@ case 7:
 	
 	
 	
-		return 26;
-		//return 33;
+		return 29;
 	
 
 break;
@@ -2568,64 +2587,71 @@ case 8:
 	
 	
 	
-		return 28;
-		//return 33;
+		return 26;
 	
 
 break;
-case 9:return 23;
+case 9:
+	
+	
+	
+		return 28;
+	
+
 break;
-case 10:return 33;
+case 10:return 23;
 break;
 case 11:return 33;
 break;
-case 12:return 35;
+case 12:return 33;
 break;
-case 13:/* skip whitespace */
+case 13:return 35;
 break;
-case 14:return 34;
+case 14:/* skip whitespace */
 break;
-case 15:return 27;
+case 15:return 34;
 break;
-case 16:return 31;
+case 16:return 27;
 break;
-case 17:return 32;
+case 17:return 31;
 break;
-case 18:return 19;
+case 18:return 32;
 break;
-case 19:return 20;
+case 19:return 19;
 break;
-case 20:return 18;
+case 20:return 20;
 break;
-case 21:return 12;
+case 21:return 18;
 break;
-case 22:return 21;
+case 22:return 12;
 break;
-case 23:return 13;
+case 23:return 21;
 break;
-case 24:return 14;
+case 24:return 13;
 break;
-case 25:return 16;
+case 25:return 14;
 break;
-case 26:return 15;
+case 26:return 16;
 break;
-case 27:return 17;
+case 27:return 15;
 break;
-case 28:return 22;
+case 28:return 17;
 break;
-case 29:return '"';
+case 29:return 22;
 break;
-case 30:return "'";
+case 30:return '"';
 break;
-case 31:return "!";
+case 31:return "'";
 break;
-case 32:return 11;
+case 32:return "!";
 break;
-case 33:return 36;
+case 33:return 11;
 break;
-case 34:return 37;
+case 34:return 36;
 break;
-case 35:return 5;
+case 35:return 37;
+break;
+case 36:return 5;
 break;
 }
 
@@ -2926,15 +2952,18 @@ break;
 
 		public T Pop()
 		{
-		    var i = Math.Max(0, Count - 1);
+		    var i = Math.Max(0, Count);
 		    if (i == 0)
 		    {
 		        return null;
 		    }
-
-		    var val = this[i];
-			RemoveAt(i);
-		    return val;
+			try {
+		    	var val = this[i];
+				RemoveAt(i);
+			    return val;
+			} catch (Exception e) {
+				throw new Exception ("Ah snap.");
+			}
 		}
 
 		new public T this[int index]
